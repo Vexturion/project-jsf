@@ -7,30 +7,44 @@
 	<h:outputStylesheet library="css" name="styles.css"></h:outputStylesheet>
 </h:head>
 <h:body>
-Bienvenido a la pantalla principal
+	<p:outputLabel value="Bienvenido a la pantalla principal"></p:outputLabel>
+	<h:form>
+		<p:dataTable id="tblEmpleados"
+			value="#{principalController.empleados}" var="empleado"
+			paginator="true" rows="10"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} registros"
+			rowsPerPageTemplate="5,10,{ShowAll|'Todo'}"
+			emptyMessage="No se encontraron registros" paginatorPosition="bottom"
+			filteredValue="#{principalController.empleadosFiltrados}">
 
-<h:dataTable id="tblEmpleados" value="#{principalController.empleados}" var="empleado" headerClass="headerTable" rowClasses="rowTable rowTableLine" >
-		<h:column>
-			<f:facet name="header">Nombre</f:facet>
-			<h:outputText value="#{empleado.nombre}"></h:outputText>
-		</h:column>
-		<h:column>
-			<f:facet name="header">Primer Apellido</f:facet>
-			<h:outputText value="#{empleado.primerApellido}"></h:outputText>
-		</h:column>
-		<h:column>
-			<f:facet name="header">Segundo Apellido</f:facet>
-			<h:outputText value="#{empleado.segundoApellido}"></h:outputText>
-		</h:column>
-		<h:column>
-			<f:facet name="header">Puesto</f:facet>
-			<h:outputText value="#{empleado.puesto}"></h:outputText>
-		</h:column>
-		<h:column>
-			<f:facet name="header">Status</f:facet>
-			<h:outputText value="Activo" rendered="#{empleado.status}"></h:outputText>
-			<h:outputText value="Inactivo" rendered="#{!empleado.status}"></h:outputText>
-		</h:column>
-	</h:dataTable>
+			<p:column headerText="Nombre" filterBy="#{empleado.nombre}"
+				filterMatchMode="startsWith" sortBy="#{empleado.nombre}">
+				<h:outputText value="#{empleado.nombre}"></h:outputText>
+			</p:column>
+
+			<p:column headerText="Primer Apellido"
+				filterBy="#{empleado.primerApellido}" filterMatchMode="startsWith"
+				sortBy="#{empleado.primerApellido}">
+				<h:outputText value="#{empleado.primerApellido}"></h:outputText>
+			</p:column>
+
+			<p:column headerText="Segundo apellido"
+				filterBy="#{empleado.segundoApellido}" filterMatchMode="startsWith"
+				sortBy="#{empleado.segundoApellido}">
+				<h:outputText value="#{empleado.segundoApellido}"></h:outputText>
+			</p:column>
+
+			<p:column headerText="Puesto" filterBy="#{empleado.puesto}"
+				filterMatchMode="startsWith" sortBy="#{empleado.puesto}">
+				<h:outputText value="#{empleado.puesto}"></h:outputText>
+			</p:column>
+
+			<p:column headerText="Status" sortBy="#{empleado.status}">
+				<h:outputText value="Activo" rendered="#{empleado.status}"></h:outputText>
+				<h:outputText value="Inactivo" rendered="#{!empleado.status}"></h:outputText>
+			</p:column>
+		</p:dataTable>
+	</h:form>
 </h:body>
 </html>
