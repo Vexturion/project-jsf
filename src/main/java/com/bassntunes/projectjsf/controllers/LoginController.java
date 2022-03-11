@@ -31,17 +31,17 @@ public class LoginController {
 	 * metodo que permite ingresar a la pantalla principal del proyecto
 	 */
 	public void ingresar() {
-		System.out.println("Usuario" + usuario);
+		System.out.println("Usuario: " + usuario + " Password: " + password);
 		if (usuario.equals("pepe") && password.equals("123")) {
 			try {
 				this.redireccionar("Principal.xhtml");
 			} catch (IOException e) {
-				FacesContext.getCurrentInstance().addMessage("formLogin:txtUsuario", new FacesMessage(FacesMessage.SEVERITY_FATAL, "La pagina no existe", ""));
+				FacesContext.getCurrentInstance().addMessage("formLogin:txtUsuario", new FacesMessage(FacesMessage.SEVERITY_FATAL, "404", "La pagina no existe"));
 				e.printStackTrace();
 			}
 		} else {
-			FacesContext.getCurrentInstance().addMessage("formLogin:txtUsuario", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario incorrecto", ""));
-			FacesContext.getCurrentInstance().addMessage("formLogin:txtPassword", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Password incorrecto", ""));
+			FacesContext.getCurrentInstance().addMessage("formLogin:txtUsuario", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ups", "EL usuario no existe"));
+			FacesContext.getCurrentInstance().addMessage("formLogin:txtPassword", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ups", "Password incorrecto"));
 		}
 	}
 

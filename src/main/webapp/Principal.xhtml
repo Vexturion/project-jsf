@@ -1,6 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Pantalla principal</title>
 	<h:outputStylesheet library="css" name="styles.css"></h:outputStylesheet>
@@ -8,7 +9,7 @@
 <h:body>
 Bienvenido a la pantalla principal
 
-<h:dataTable id="tblEmpleados" value="#{principalController.empleados}" var="empleado" headerClass="headerTable" rowClasses="rowTable rowTableLine">
+<h:dataTable id="tblEmpleados" value="#{principalController.empleados}" var="empleado" headerClass="headerTable" rowClasses="rowTable rowTableLine" >
 		<h:column>
 			<f:facet name="header">Nombre</f:facet>
 			<h:outputText value="#{empleado.nombre}"></h:outputText>
