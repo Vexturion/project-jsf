@@ -5,18 +5,38 @@
 <h:head>
 	<title>Pantalla principal</title>
 	<h:outputStylesheet library="css" name="styles.css"></h:outputStylesheet>
+	<meta name="viewport" content="width=device-width, user-scalable=no"></meta>
 </h:head>
 <h:body>
-	<p:outputLabel value="Bienvenido a la pantalla principal"></p:outputLabel>
+	<p:outputLabel value="Bienvenido #{sessionController.usuarioDTO.usuario} a la pantalla principal"></p:outputLabel>
+
+
+
 	<h:form>
-		<p:dataTable id="tblEmpleados"
+	
+	<p:commandButton value="Cerrar sesion" action="#{sessionClosedController.cerrarSesion}"></p:commandButton>
+
+		<div>
+
+			<p:commandButton value="PDF"
+				styleClass="p-mr-2 p-mb-2 ui-button-outlined" onclick="{Exporters}">
+				<p:dataExporter type="pdf" target="tblEmpleados"
+					fileName="ReporteEmpleados" pageOnly="true" />
+			</p:commandButton>
+
+		</div>
+
+
+		<p:dataTable reflow="true" id="tblEmpleados"
 			value="#{principalController.empleados}" var="empleado"
 			paginator="true" rows="10"
-			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
 			currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} registros"
 			rowsPerPageTemplate="5,10,{ShowAll|'Todo'}"
 			emptyMessage="No se encontraron registros" paginatorPosition="bottom"
 			filteredValue="#{principalController.empleadosFiltrados}">
+
+
 
 			<p:column headerText="Nombre" filterBy="#{empleado.nombre}"
 				filterMatchMode="startsWith" sortBy="#{empleado.nombre}">
